@@ -78,7 +78,27 @@ function DrawBubblechart(sampleId) {
 }
 
 function ShowMetadata(sampleId) {
+
     console.log(`ShowMetadata(${sampleId})`);
+    
+    d3.json("samples.json").then(function(data) {
+
+        console.log(data);
+
+        let metadataArray = data.metadata.filter(metadata => metadata.id === sampleId);
+        console.log(metadataArray)
+
+        let demographicInfo = d3.select("sample-metadata");
+
+        demographicInfo.html("");
+
+        Object.entries(metadataArray).forEach(([key, value]) => {
+
+            demographicInfo.append("h5").text(`${key}: ${value}`);
+        });
+
+    });
+
 }
 
 function optionChanged(id) {
