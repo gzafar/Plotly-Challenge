@@ -85,16 +85,17 @@ function ShowMetadata(sampleId) {
 
         console.log(data);
 
-        let metadataArray = data.metadata.filter(metadata => metadata.id === sampleId);
+        let metadataArray = data.metadata.filter(metadata => metadata.id == sampleId);
         console.log(metadataArray)
 
-        let demographicInfo = d3.select("sample-metadata");
+        let demographicInfo = d3.select("#sample-metadata");
 
         demographicInfo.html("");
 
-        Object.entries(metadataArray).forEach(([key, value]) => {
+        Object.entries(metadataArray[0]).forEach(([key, value]) => {
+            console.log([key, value]);
+            demographicInfo.append("h5").text(`${key.toUpperCase()}: ${value}`);
 
-            demographicInfo.append("h5").text(`${key}: ${value}`);
         });
 
     });
